@@ -26,7 +26,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 //Users
 Route::get('/users', [UserController::class, 'index']);
+Route::get('/users/{user:id}', [UserController::class, 'show']);
 Route::post('/users', [UserController::class, 'store']);
+Route::put('/users/{user:id}', [UserController::class, 'update']);
+Route::delete('/users/{user:id}', [UserController::class, 'nonActiveUser']);
 
 //ROUTE REGION
 Route::get('/regions', [RegionController::class, 'index']);
@@ -34,6 +37,7 @@ Route::post('/regions', [RegionController::class, 'store']);
 
 //ROUTE ACCOUNTS
 Route::get('/accounts', [AccountController::class, 'index']);
+Route::get('/accounts/{account:id_user}', [AccountController::class, 'show']);
 Route::post('/accounts', [AccountController::class, 'store']);
 
 //ROUTES TYPE TRANSACTIONS
@@ -42,4 +46,5 @@ Route::post('/type-transactions', [TypeTransactionController::class, 'store']);
 
 //ROUTES TRANSACTIONS
 Route::get('/transactions', [TransactionController::class, 'index']);
+Route::get('/transactions/{transaction:id_account}', [TransactionController::class, 'show']);
 Route::post('/transactions', [TransactionController::class, 'store']);

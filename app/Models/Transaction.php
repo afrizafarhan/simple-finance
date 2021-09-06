@@ -12,7 +12,8 @@ class Transaction extends Model
     public static $tableName = 'transactions';
     public static $tableNameJoins = [
         'accounts',
-        'type_transactions'
+        'type_transactions',
+        'users'
     ];
     public static $typeTransaction = ['BALANCE_INC' => [1, 3],'BALANCE_DEC' => [2, 4]];
 

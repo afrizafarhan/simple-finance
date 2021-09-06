@@ -16,6 +16,7 @@ class AccountController extends Controller
     {
         return response()
         ->json(['data' => Account::join(Account::$tableNameJoin[0], Account::$tableName.'.id_user','=', Account::$tableNameJoin[0].'.id')
+        ->where('status','=',1)
         ->get([Account::$tableName.'.id', Account::$tableNameJoin[0].'.name', Account::$tableName.'.balance', Account::$tableNameJoin[0].'.status'])]);
     }
 
@@ -57,7 +58,12 @@ class AccountController extends Controller
      */
     public function show(Account $account)
     {
-        //
+        
+        return response()
+        ->json(['data' => Account::join(Account::$tableNameJoin[0], Account::$tableName.'.id_user','=', Account::$tableNameJoin[0].'.id')
+        ->where('status','=',1)
+        ->where('id_user', $account->id_user)
+        ->get([Account::$tableName.'.id', Account::$tableNameJoin[0].'.name', Account::$tableName.'.balance', Account::$tableNameJoin[0].'.status'])]);
     }
 
     /**

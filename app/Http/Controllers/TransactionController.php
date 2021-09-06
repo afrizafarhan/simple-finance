@@ -16,7 +16,12 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        return response()->json(['data' => Transaction::leftJoin(Transaction::$tableNameJoins[0], Transaction::$tableName.'.id_account', '=', Transaction::$tableNameJoins[0].'.id')->leftJoin(Transaction::$tableNameJoins[1], Transaction::$tableName.'.id_type_transaction', '=', Transaction::$tableNameJoins[1].'.id')->get()]);
+        return response()->json(['data' => Transaction::leftJoin(Transaction::$tableNameJoins[0], Transaction::$tableName.'.id_account', '=', Transaction::$tableNameJoins[0].'.id')->leftJoin(Transaction::$tableNameJoins[2], Transaction::$tableNameJoins[0].'.id_user', '=', Transaction::$tableNameJoins[2].'.id')->leftJoin(Transaction::$tableNameJoins[1], Transaction::$tableName.'.id_type_transaction', '=', Transaction::$tableNameJoins[1].'.id')->get([
+            Transaction::$tableName.'.id',
+            Transaction::$tableNameJoins[2].'.name as name_account',
+            Transaction::$tableNameJoins[1].'.name as name_type_transaction',
+            Transaction::$tableName.'.nominal_in_out'
+        ])]);
     }
 
     /**
@@ -72,7 +77,13 @@ class TransactionController extends Controller
      */
     public function show(Transaction $transaction)
     {
-        //
+
+        return response()->json(['data' => Transaction::leftJoin(Transaction::$tableNameJoins[0], Transaction::$tableName.'.id_account', '=', Transaction::$tableNameJoins[0].'.id')->leftJoin(Transaction::$tableNameJoins[2], Transaction::$tableNameJoins[0].'.id_user', '=', Transaction::$tableNameJoins[2].'.id')->leftJoin(Transaction::$tableNameJoins[1], Transaction::$tableName.'.id_type_transaction', '=', Transaction::$tableNameJoins[1].'.id')->where('id_account', $transaction->id_account)->get([
+            Transaction::$tableName.'.id',
+            Transaction::$tableNameJoins[2].'.name as name_account',
+            Transaction::$tableNameJoins[1].'.name as name_type_transaction',
+            Transaction::$tableName.'.nominal_in_out'
+        ])]);
     }
 
     /**
