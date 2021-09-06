@@ -47,7 +47,7 @@ class RegionController extends Controller
             ));
             return response()->json(['msg' => 'SUCCESS_ADD_REGION'], 200);
         }catch(\Throwable $e){
-            return response()->json(['msg' => $e->getMessage()], 500);
+            return response()->json(['msg' => 'INTERNAL_SERVER_ERROR'], 500);
         }
     }
 

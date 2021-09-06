@@ -45,7 +45,7 @@ class AccountController extends Controller
             ]));
             return response()->json(['msg' => 'SUCCESS_ADD_NEW_ACCOUNT']);
         }catch(\Throwable $e){
-            return response()->json(['msg' => 'INVALID_INTERNAL_ERROR'], 500);
+            return response()->json(['msg' => 'INTERNAL_SERVER_ERROR'], 500);
         }
     }
 

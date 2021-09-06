@@ -53,12 +53,14 @@ class TransactionController extends Controller
             }else{
                 $account->balance -= $request->nominal_in_out;
             }
+            
             $account->save();
             DB::commit();
+
             return response()->json(['msg' => 'SUCCESS_ADD_NEW_TRANSACTIONS'], 200);
         }catch(\Throwable $e){
             DB::rollback();
-            return response()->json(['msg' => $e->getMessage()], 500);
+            return response()->json(['msg' => 'INVALID_INTERNAL_ERROR'], 500);
         }
     }
 
