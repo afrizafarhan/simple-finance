@@ -13,13 +13,4 @@ class Account extends Model
     public static $tableNameJoin = ['users','transactions'];
 
     protected $guarded =['id'];
-
-    // public function users(){
-    //     return $this->belongsTo(User::class);
-    // }
-
-    // public function account()
-    // {
-    //     return $this->hasOne(Transaction::class)->latestOfMany();
-    // }
 }
